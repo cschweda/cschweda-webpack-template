@@ -1,6 +1,6 @@
 {
   "name": "cschweda-webpack-template",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This is a fork of the excellent html-webpack-template with some minor deletions and additions.",
   "main": "index.js",
   "scripts": {
