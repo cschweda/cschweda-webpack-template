@@ -4,13 +4,22 @@
 <% htmlWebpackPlugin.options.lang = htmlWebpackPlugin.options.lang || "en" %>
 <% htmlWebpackPlugin.options.links = htmlWebpackPlugin.options.links || [] %>
 <% htmlWebpackPlugin.options.meta = htmlWebpackPlugin.options.meta || [] %>
+<% htmlWebpackPlugin.options.buildInfo = htmlWebpackPlugin.options.buildInfo || [] %>
 <% htmlWebpackPlugin.options.scripts = htmlWebpackPlugin.options.scripts || [] %>
+<% htmlWebpackPlugin.options.postscripts = htmlWebpackPlugin.options.postscripts || [] %>
 
 <!DOCTYPE html>
 <html lang="<%= htmlWebpackPlugin.options.lang %>" <% if (htmlWebpackPlugin.files.manifest) { %> manifest="<%= htmlWebpackPlugin.files.manifest %>"<% } %>>
   <head>
     <meta charset="utf-8">
     <meta content="ie=edge" http-equiv="x-ua-compatible">
+
+  <!--<% if (Array.isArray(htmlWebpackPlugin.options.buildInfo)) { %>
+    <% for (item of htmlWebpackPlugin.options.buildInfo) { %>
+    <% for (key in item) { %> <%= key %>: <%= item[key] %> | <% }%>
+    <% } %>
+  <% } %>-->
+
 
     <% if (htmlWebpackPlugin.options.baseHref) { %>
     <base href="<%= htmlWebpackPlugin.options.baseHref %>">
@@ -83,19 +92,9 @@
     <script src="<%= htmlWebpackPlugin.options.devServer %>/webpack-dev-server.js" type="text/javascript"></script>
     <% } %>
 
-    <% if (htmlWebpackPlugin.options.googleAnalytics) { %>
-    <script type="text/javascript">
-      window.GoogleAnalyticsObject='ga';window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
-
-      <% if (htmlWebpackPlugin.options.googleAnalytics.trackingId) { %>
-      ga('create','<%= htmlWebpackPlugin.options.googleAnalytics.trackingId %>','auto');
-      <% } else { throw new Error("html-webpack-template requires googleAnalytics.trackingId config"); } %>
-
-      <% if (htmlWebpackPlugin.options.googleAnalytics.pageViewOnLoad) { %>
-      ga('send','pageview')
-      <% } %>
-    </script>
-    <script async defer src="https://www.google-analytics.com/analytics.js" type="text/javascript"></script>
+    <% for (item of htmlWebpackPlugin.options.postscripts) { %>
+    <% if (typeof item === 'string' || item instanceof String) { item = { src: item, type: 'text/javascript' } } %>
+  	<script<% for (key in item) { %> <%= key %>="<%= item[key] %>"<% } %>></script>
     <% } %>
   </body>
 </html>

@@ -1,4 +1,18 @@
-# HTML Webpack Template
+# Custom Webpack Template
+
+**This is a fork of the excellent [html-webpack-template](https://github.com/jaketrent/html-webpack-template) with some minor deletions and additions**
+
+## Added:
+- `buildInfo`: Information about developer name, build time/date, and GitHub repo
+- `postscripts`: Scripts to appear directly before the closing body tag, after the Webpack chunks.
+
+## Deleted:
+- Google Analytics info. In my case, I insert the info via the `vue-router`.
+
+For usage info, please see below
+
+---
+
 
 This is a template for the [webpack](http://webpack.github.io/) plugin [html-webpack-plugin](https://www.npmjs.com/package/html-webpack-plugin).
 It has a few extra features than the [default template](https://github.com/jantimon/html-webpack-plugin/blob/master/default_index.ejs)
@@ -8,16 +22,13 @@ Templates for the html-webpack-plugin are implemented using [underscore template
 (previously, in 2.x, [blueimp templates](https://github.com/blueimp/JavaScript-Templates)). You can write your own as
 well.
 
-#### Legacy version
-
-For the legacy version that works with `html-webpack-plugin@1.x`, `npm install html-webpack-plugin@2`.
 
 ## Installation
 
 Install the template in your project with npm:
 
 ```shell
-$ npm install html-webpack-template --save-dev
+$ npm install cschweda-webpack-template --save-dev
 ```
 
 ## Basic Usage
@@ -32,8 +43,6 @@ And some other optional:
 - `appMountIds`: An array of application element ids.
 - `baseHref`: Adjust the URL for relative URLs in the document ([MDN](https://developer.mozilla.org/en/docs/Web/HTML/Element/base)).
 - `devServer`: Insert the webpack-dev-server hot reload script at this host:port/path; e.g., http://localhost:3000.
-- `googleAnalytics.trackingId`: Track usage of your site via [Google Analytics](http://analytics.google.com).
-- `googleAnalytics.pageViewOnLoad`: Log a `pageview` event after the analytics code loads.
 - `lang`: String identifying your content language
 - `links`: Array of `<link>` elements.
   - If an array element is a string, the value is assigned to the `href` attribute and the `rel` attribute is set to
@@ -49,6 +58,8 @@ And some other optional:
   - If an array element is an object, the object's properties and values are used as the attribute names and values,
     respectively.
 - `window`: Object that defines data you need to bootstrap a JavaScript app.
+- `postscripts`: Array of scripts to appear at the bottom of the page, after the Webpack chunks.
+- `buildInfo`: Meta info about build (Contact name, GitHub repo, time/date, etc.)
 
 Plus any [html-webpack-plugin config options](https://github.com/ampedandwired/html-webpack-plugin#configuration)
 otherwise available.
@@ -64,17 +75,13 @@ Here's an example webpack config illustrating how to use these options in your `
     new HtmlWebpackPlugin({
       // Required
       inject: false,
-      template: require('html-webpack-template'),
-      // template: 'node_modules/html-webpack-template/index.ejs',
+      template: require('cschweda-webpack-template'),
+      // template: 'node_modules/cschweda-webpack-template/index.ejs',
 
       // Optional
       appMountId: 'app',
       baseHref: 'http://example.com/awesome',
-      devServer: 'http://localhost:3001',
-      googleAnalytics: {
-        trackingId: 'UA-XXXX-XX',
-        pageViewOnLoad: true
-      },
+      devServer: 'http://localhost:8080',
       meta: [
         {
           name: 'description',
@@ -84,18 +91,8 @@ Here's an example webpack config illustrating how to use these options in your `
       mobile: true,
       lang: 'en-US',
       links: [
-        'https://fonts.googleapis.com/css?family=Roboto',
-        {
-          href: '/apple-touch-icon.png',
-          rel: 'apple-touch-icon',
-          sizes: '180x180'
-        },
-        {
-          href: '/favicon-32x32.png',
-          rel: 'icon',
-          sizes: '32x32',
-          type: 'image/png'
-        }
+        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
+        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css'
       ],
       inlineManifestWebpackName: 'webpackManifest',
       scripts: [
@@ -105,7 +102,20 @@ Here's an example webpack config illustrating how to use these options in your `
           type: 'module'
         }
       ],
-      title: 'My App',
+      postscripts: [
+        'https://code.jquery.com/jquery-3.2.1.slim.js',
+        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'
+      ],
+      title: 'My Webpack App',
+      buildInfo: [
+        {
+          Build: moment().tz("America/Chicago").format("dddd, MMMM Do YYYY, h:mm:ss a"),
+          // npm i moment-timezone --save-dev
+          // let moment = require('moment-timezone')
+          GitHub: 'https://github.com/GitHubName/GitHubProject',
+          Contact: 'myname@somewhere.com'
+        }
+      ],
       window: {
         env: {
           apiHost: 'http://myapi.com/api/v1'
