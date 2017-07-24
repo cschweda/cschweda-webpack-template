@@ -19,7 +19,7 @@ module.exports = {
       inject: false,
       template: '../index.ejs',
       appMountId: 'app',
-      devServer: 'http://localhost:3001',
+      devServer: 'http://localhost:8080',
       meta: [
         {
           name: 'description',
