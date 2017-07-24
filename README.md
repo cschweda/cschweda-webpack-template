@@ -9,7 +9,7 @@
 ## Deleted:
 - Google Analytics info. In my case, I insert the info via the `vue-router`.
 
-For usage info, please see below
+For usage info, please see below.
 
 ---
 
