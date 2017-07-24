@@ -4,7 +4,6 @@
   "description": "This is a fork of the excellent html-webpack-template with some minor deletions and additions.",
   "main": "index.js",
   "scripts": {
-    "commit": "git-cz",
     "test": "echo \"Everything is fine.  No tests here.\" && exit 0",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },

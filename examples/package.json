@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "webpack-dev-server",
+    "build": "webpack .",
+    "serve": "serve ./dist -s",
     "start": "webpack-dev-server"
   },
   "devDependencies": {
@@ -11,6 +14,7 @@
     "babel-loader": "^6.2.1",
     "babel-preset-es2015": "^6.3.13",
     "html-webpack-plugin": "^2.3.0",
+    "serve": "^6.0.3",
     "webpack": "^1.12.10",
     "webpack-dev-server": "^1.14.0"
   }

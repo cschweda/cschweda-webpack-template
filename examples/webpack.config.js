@@ -12,7 +12,7 @@ module.exports = {
     loaders: [{ test: /\.js$/, loader: 'babel-loader' }]
   },
   devServer: {
-    port: 3001
+    port: 8080
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -20,10 +20,6 @@ module.exports = {
       template: '../index.ejs',
       appMountId: 'app',
       devServer: 'http://localhost:3001',
-      googleAnalytics: {
-        trackingId: 'UA-XXXX-XX',
-        pageViewOnLoad: true
-      },
       meta: [
         {
           name: 'description',
@@ -53,7 +49,15 @@ module.exports = {
           type: 'module'
         }
       ],
+      postscripts: [
+        'http://example.com/my-postsomescript.js',
+      ],
       title: 'My App',
+      buildInfo: [{
+        Build: new Date(),
+        GitHub: 'https://github.com/cschweda/cschweda-webpack-template',
+        Contact: 'test@test.com'
+      }],
       window: {
         env: {
           apiHost: 'http://myapi.com/api/v1'
