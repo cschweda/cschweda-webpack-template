@@ -6,6 +6,7 @@
 <% htmlWebpackPlugin.options.meta = htmlWebpackPlugin.options.meta || [] %>
 <% htmlWebpackPlugin.options.buildInfo = htmlWebpackPlugin.options.buildInfo || [] %>
 <% htmlWebpackPlugin.options.scripts = htmlWebpackPlugin.options.scripts || [] %>
+<% htmlWebpackPlugin.options.headscripts = htmlWebpackPlugin.options.headscripts || [] %>
 <% htmlWebpackPlugin.options.postscripts = htmlWebpackPlugin.options.postscripts || [] %>
 
 <!DOCTYPE html>
@@ -48,6 +49,11 @@
 
     <% for (key in htmlWebpackPlugin.files.css) { %>
     <link href="<%= htmlWebpackPlugin.files.css[key] %>" rel="stylesheet">
+    <% } %>
+
+    <% for (item of htmlWebpackPlugin.options.headscripts) { %>
+    <% if (typeof item === 'string' || item instanceof String) { item = { src: item, type: 'text/javascript' } } %>
+    <script<% for (key in item) { %> <%= key %>="<%= item[key] %>"<% } %>></script>
     <% } %>
 
   </head>

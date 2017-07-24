@@ -58,8 +58,9 @@ And some other optional:
   - If an array element is an object, the object's properties and values are used as the attribute names and values,
     respectively.
 - `window`: Object that defines data you need to bootstrap a JavaScript app.
-- `postscripts`: Array of scripts to appear at the bottom of the page, after the Webpack chunks.
 - `buildInfo`: Meta info about build (Contact name, GitHub repo, time/date, etc.)
+- `postscripts`: Array of scripts to appear at the bottom of the page, after the Webpack chunks.
+- `headScripts`: Array of scripts to appear at the bottom of the head section, just before the closed ```</head>``` tag.
 
 Plus any [html-webpack-plugin config options](https://github.com/ampedandwired/html-webpack-plugin#configuration)
 otherwise available.
@@ -101,6 +102,9 @@ Here's an example webpack config illustrating how to use these options in your `
           src: '/myModule.js',
           type: 'module'
         }
+      ],
+      headscripts: [
+        'https://fontawesome.js'
       ],
       postscripts: [
         'https://code.jquery.com/jquery-3.2.1.slim.js',
