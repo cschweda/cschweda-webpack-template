@@ -5,9 +5,10 @@
 ## Added:
 - `buildInfo`: Information about developer name, build time/date, and GitHub repo
 - `postscripts`: Scripts to appear directly before the closing body tag, after the Webpack chunks.
+- `headscripts`: Scripts to appear directly before the closing head tag.
 
 ## Deleted:
-- Google Analytics info. In my case, I insert the info via the `vue-router`.
+- Google Analytics info. (In my case, I inject the GA info via vue-router.)
 
 For usage info, please see below.
 
