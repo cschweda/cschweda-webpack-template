@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/cschweda-webpack-template.svg)](https://badge.fury.io/js/cschweda-webpack-template)
+
 # Custom Webpack Template
 
 **This is a fork of the excellent [html-webpack-template](https://github.com/jaketrent/html-webpack-template) with some minor deletions and additions**
